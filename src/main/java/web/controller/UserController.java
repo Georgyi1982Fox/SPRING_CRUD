@@ -21,21 +21,21 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "userList", method = RequestMethod.GET)
+    @RequestMapping(value = "/userList", method = RequestMethod.GET)
     public String showUserList(ModelMap modelMap) throws SQLException {
         List<User> userList = userService.listAllUsers();
         modelMap.addAttribute("allUsers", userList);
         return "userList";
     }
 
-    @RequestMapping(value = "/newUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/addUser", method = RequestMethod.GET)
     public String addUserPage(Model model) throws SQLException {
         User user = new User();
         model.addAttribute("newUser", user);
         return "addUser";
     }
 
-    @RequestMapping(value="/save", method=RequestMethod.POST)
+    @RequestMapping(value="/addUser", method=RequestMethod.POST)
     public String newUserSubmit(@ModelAttribute("user") User user) throws SQLException {
         if(user.getName() == null || user.getName().isEmpty()) {
             return "redirect:/userList";
@@ -45,8 +45,7 @@ public class UserController {
         }
     }
 
-
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    @RequestMapping(value = "/editUser", method = RequestMethod.GET)
     public String getEdit(@RequestParam(value = "id", required = true)long id, Model model) throws SQLException {
 
         User user = userService.getUserById(id);
@@ -54,7 +53,7 @@ public class UserController {
         return "editPage";
     }
 
-    @RequestMapping(value = "/updated", method = RequestMethod.POST)
+    @RequestMapping(value = "/editUser", method = RequestMethod.POST)
     public String updatedUser(@ModelAttribute("user") User user) throws SQLException{
         User userUToUpdate = new User(user.getName(),user.getPassword(),user.getEmail());
 
@@ -66,7 +65,7 @@ public class UserController {
        return "redirect:/userList";
    }
 
-   @RequestMapping(value = "/delete", method = RequestMethod.GET)
+   @RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
    public String deleteUser(@RequestParam(value = "id", required = true)long id, Model model) throws SQLException {
         userService.deleteUser(id);
         model.addAttribute("userId",id);

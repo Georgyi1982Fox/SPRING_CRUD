@@ -11,7 +11,7 @@
 <body>
 <div align="center">
     <h1>Edit User</h1>
-    <form:form action="updated" method="post" modelAttribute="userEdit">
+    <form:form action="/editUser" method="post" modelAttribute="userEdit">
         <table>
             <form:hidden path="id"/>
             <tr>

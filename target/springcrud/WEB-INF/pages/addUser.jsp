@@ -21,7 +21,7 @@
 <div align="center">
 
     <h2>New User</h2>
-    <form:form action="save" method="post" modelAttribute="newUser">
+    <form:form action="addUser" method="post" modelAttribute="newUser">
         <table border="0" cellpadding="5">
             <tr>
                 <td>Name: </td>
